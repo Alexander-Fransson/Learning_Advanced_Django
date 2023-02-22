@@ -44,7 +44,15 @@ $ pip3 freeze > requirements.txt
 $ pip3 install -r /requirements.txt
 ```
 
-## Run project with docker
+## Prouction server on ubuntu
+* Download project to production server via github or whatever gets the job done.
+* Add ip or domain to allowed hosts, if testing runserver dont forget 0.0.0.0:8000 to run on ip and not localhost.
+* Download gcc 'compiler' and python3.10-dev.
 ```bash
-$ docker-compose up
+$ sudo apt-get install python3.10-dev
+$ sudo apt-get install gcc
+```
+* Install uWSGI
+```bash
+$ pip3 install uwsgi
 ```
