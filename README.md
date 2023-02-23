@@ -52,7 +52,55 @@ $ pip3 install -r /requirements.txt
 $ sudo apt-get install python3.10-dev
 $ sudo apt-get install gcc
 ```
-* Install uWSGI
+* Install uWSGI.
 ```bash
 $ pip3 install uwsgi
+```
+* Test out uwsgi with the wsgi file test.py.
+```bash
+$ uwsgi --http :8000 --wsgi-file test.py
+```
+* Test it out on the wsgi module in the project.
+```bash
+$ uwsgi --http :8000 --module restasured.wsgi
+```
+* Install nginx.
+```bash
+$ sudo apt-get install nginx
+```
+* Create a configuration file.
+```bash
+$ cd /etc/nginx/sites-available
+$ touch restasured.conf
+```
+* Configure the file with whatever text editor at your disposal. Here is a basic configuration.
+```conf
+# the upstream component nginx needs to connect to
+upstream django {
+    server unix:///home/udoms/restasured/restasured.sock;
+}
+
+# configuration of the server
+server {
+    listen      80;
+    server_name 192.168.64.3 www.192.168.64.3;
+    charset     utf-8;
+
+    # max upload size
+    client_max_body_size 75M;
+
+    # Django media and static files
+    location /media  {
+        alias /home/udoms/restasured/media;
+    }
+    location /static {
+        alias /home/udoms/restasured/static;
+    }
+
+    # Send all non-media requests to the Django server.
+    location / {
+        uwsgi_pass  django;
+        include     /home/udoms/restasured/uwsgi_params;
+    }
+}
 ```
