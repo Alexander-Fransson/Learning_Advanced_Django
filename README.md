@@ -77,7 +77,7 @@ $ touch restasured.conf
 ```conf
 # the upstream component nginx needs to connect to
 upstream django {
-    server unix:///home/udoms/restasured/restasured.sock;
+    server unix:///home/megatron/Projects/Learning_Advanced_Django/restasured/restasured.sock;
 }
 
 # configuration of the server
@@ -91,16 +91,17 @@ server {
 
     # Django media and static files
     location /media  {
-        alias /home/udoms/restasured/media;
+        alias /home/megatron/Projects/Learning_Advanced_Django/restasured/media;
     }
     location /static {
-        alias /home/udoms/restasured/static;
+        alias /home/megatron/Projects/Learning_Advanced_Django/restasured/static;
     }
 
     # Send all non-media requests to the Django server.
     location / {
         uwsgi_pass  django;
-        include     /home/udoms/restasured/uwsgi_params;
+        include     /home/megatron/Projects/Learning_Advanced_Django/restasured/uwsgi_params;
     }
 }
 ```
+* create the uwsgi params file in the location specified
