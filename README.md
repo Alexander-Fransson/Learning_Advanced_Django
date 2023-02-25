@@ -132,7 +132,11 @@ $ sudo ln -s /etc/nginx/sites-available/restasured.conf /etc/nginx/sites-enabled
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 ```
-* Create static folders acording to configuration.
+* Create static folders acording to configuration on server.
 ```bash
 $ python3 manage.py collectstatic
+```
+* Create a media directory as specified in the .conf file.
+```bash
+$ mkdir /home/megatron/Projects/Learning_Advanced_Django/restasured/media
 ```
