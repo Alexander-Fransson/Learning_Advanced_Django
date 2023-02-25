@@ -153,3 +153,30 @@ $ chmod 755 folder/file
 ```bash
 $ uwsgi --socket restasured.sock --module restasured.wsgi --chmod-socket=664
 ```
+17. Instead of passing arguments directly to uwsgi you can streamline the process in a file.
+```bash
+$ touch /home/megatron/Projects/Learn_Advanced_Django/restasured/restasured_uwsgi.ini
+```
+```ini
+[uwsgi]
+
+# full path to Django project's root directory
+chdir            = /home/megatron/Projects/Learning_Advanced_Django/restasured
+# Django's wsgi file
+module           = restasured.wsgi
+# full path to python virtual env
+home             = /home/megatron/Projects/Learning_Advanced_Django/.venv
+
+# enable uwsgi master process
+master          = true
+# maximum number of worker processes
+processes       = 10
+# the socket (use the full path to be safe
+socket          = /home/megatron/Projects/Learning_Advanced_Django/restasured/restasured.sock
+# socket permissions
+chmod-socket    = 666
+# clear environment on exit
+vacuum          = true
+# daemonize uwsgi and write messages into given log
+daemonize       = /home/megatron/uwsgi-emperor.log
+```
