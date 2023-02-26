@@ -180,3 +180,52 @@ vacuum          = true
 # daemonize uwsgi and write messages into given log
 daemonize       = /home/megatron/uwsgi-emperor.log
 ```
+### Set up emperor and vassals to auo restart server on crash and configure multiple servers from one.
+1. Create a new vassals directory in .venv
+```bash
+$ cd .venv
+$ mkdir vassals
+```
+2. Make a simlink from the .ini file to the vassals directory.
+```bash
+$ sudo ln -s /home/megatron/Projects/Learn_Advanced_Django/restasured/restasured_uwsgi.ini /home/megatron/Projects/Learn_Advanced_Django/.venv/vassals
+```
+3. Check if it succeeded.
+```bash
+$ ls ./vassals
+```
+4. Reboot the server.
+```bash
+$ sudo reboot
+```
+5. When ubuntu has rebooted run the server in emperor-mode.
+```bash
+$ source .venv/bin/activate
+$ uwsgi --emperor /home/megatron/Projects/Learn_Advanced_Django/.venv/vassals --uid www-data --gid www-data
+```
+6. Create a service that starts the server on boot.
+```bash
+$ touch /etc/systemd/system/emperor.uwsgi.service
+$ sudo nano /etc/systemd/system/emperor.uwsgi.service
+```
+```service
+[Unit]
+Description=uwsgi emperor for restasured website
+After=network.target
+
+[Service]
+User=megatron
+Restart=always
+ExecStart=/home/megatron/Projects/Learn_Advanced_Django/.venv/bin/uwsgi --emperor /home/megatron/Projects/Learn_Advanced_Django/.venv/vassals --uid www-data --gid www-data
+
+[Install]
+WantedBy=multi-user.target
+```
+7. Enable it with systemctl
+```bash
+$ systemctl enable emperor.uwsgi.service
+```
+8. Test it out by rebooting or starting it manualy like this.
+```bash
+$ systemctl start emperor.uwsgi.service
+```
