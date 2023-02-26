@@ -229,3 +229,32 @@ $ systemctl enable emperor.uwsgi.service
 ```bash
 $ systemctl start emperor.uwsgi.service
 ```
+## Using postgres as database
+1. Install postgres and its development headers.
+```bash
+$ sudo apt-get install postgresql
+$ sudo apt-get install libpq-dev
+```
+2. Create new postgres user.
+```bash
+$ sudo -u user_name ("t.ex postgres") psql
+```
+3. The command will open psql as the user. In psql create a database and configure the settings.
+```psql
+CREATE DATABASE "dbname" (t.ex restdb);
+CREATE USER "dbuser" WITH PASSWORD 'password';
+GRANT ALL PRIVILEGES ON DATABASE "dbname" TO dbuser;
+\q
+```
+4. Install psycopg2 inside .venv.
+```bash
+$ pip3 install psycopg2
+$ pip3 freeze > requirements.txt
+```
+5. Configure Settings.
+```py
+
+```
+
+
+# //Remember to document how to secure the code for production, aquiering an ssh certificate and so on.
