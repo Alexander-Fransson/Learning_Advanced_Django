@@ -251,10 +251,23 @@ GRANT ALL PRIVILEGES ON DATABASE "dbname" TO dbuser;
 $ pip3 install psycopg2
 $ pip3 freeze > requirements.txt
 ```
-5. Configure Settings.
-```py
-
+5. Start postgres and enable it.
+```bash
+$ sudo systemctl start postgresql
+$ sudo systemctl ebable postgresql
 ```
-
+6. Configure the database settings at settings.py
+```py
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'restdb',
+        'USER': 'dbuser',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
+```
 
 # //Remember to document how to secure the code for production, aquiering an ssh certificate and so on.

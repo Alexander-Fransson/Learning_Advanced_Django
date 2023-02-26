@@ -79,8 +79,8 @@ DATABASES = {
         'NAME': 'restdb',
         'USER': 'dbuser',
         'PASSWORD': 'password',
-        'HOST': '0.0.0.0',
-        'PORT': '80',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
