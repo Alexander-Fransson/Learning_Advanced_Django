@@ -130,7 +130,7 @@ $ sudo ln -s /etc/nginx/sites-available/restasured.conf /etc/nginx/sites-enabled
 12. Configure the static root in the settings.py file.
 ```py
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+STATIC_ROOT = PATH.joinpath(BASE_DIR, "static/")
 ```
 13. Create static folders acording to configuration on server.
 ```bash
