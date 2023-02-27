@@ -269,5 +269,8 @@ DATABASES = {
     }
 }
 ```
-
+7. Migrate the database.
+```bash
+$ python3 manage.py migrate
+```
 # //Remember to document how to secure the code for production, aquiering an ssh certificate and so on.
