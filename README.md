@@ -273,4 +273,27 @@ DATABASES = {
 ```bash
 $ python3 manage.py migrate
 ```
+## Create a rest api
+1. Download djangorestframework.
+```bash
+$ pip3 install djangorestframework
+$ pip3 freeze > requirements.txt
+```
+2. Create a superuser for the admin panel.
+```bash
+$ python3 manage.py createsuperuser --email dbuser@example.com --username dbuser
+Password: password
+```
+3.  Createa new app for the rest api.
+```bash
+$ python3 manage.py startapp api
+```
+4. Create a serializer.
+```bash
+$ touch ./api/serializers.py
+```
+```py
+
+```
+
 # //Remember to document how to secure the code for production, aquiering an ssh certificate and so on.
