@@ -292,8 +292,19 @@ $ python3 manage.py startapp api
 ```bash
 $ touch ./api/serializers.py
 ```
+5. Configure views in restasured/api/views.py and urls in restasured/urls.py
+6. Add pagination configuration to the settings.py file which controlles how many messages are shown on a page at onec.
 ```py
-
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
 ```
-
+7. Add restframework to installed apps.
+```py
+INSTALLED_APPS = [
+    ...
+    'rest_framework',
+]
+```
 # //Remember to document how to secure the code for production, aquiering an ssh certificate and so on.
