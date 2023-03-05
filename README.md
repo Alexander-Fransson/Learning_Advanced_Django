@@ -281,30 +281,37 @@ $ pip3 freeze > requirements.txt
 ```
 2. Create a superuser for the admin panel.
 ```bash
-$ python3 manage.py createsuperuser --email dbuser@example.com --username dbuser
-Password: password
+$ python3 manage.py createsuperuser --email megarton@fake.com --username megatron
+Password: leet1337
 ```
-3.  Createa new app for the rest api.
+3. Create a models file and configure your data model classes.
 ```bash
-$ python3 manage.py startapp api
+$ touch restasured/restasured/models.py
+``` 
+```py
+from django.db import models
+
+class Drink(models.Model):
+    name = models.CharField(max_length=200)
 ```
-4. Create a serializer.
+4. Add the folder that the models.py file is located in to the INSTALLED_APPS array in settings.py.
+
+5. Make a migration to translate changes into the chosen database language.
 ```bash
-$ touch ./api/serializers.py
+$ python3 manage.py makemigrations restasured
 ```
-5. Configure views in restasured/api/views.py and urls in restasured/urls.py
-6. Add pagination configuration to the settings.py file which controlles how many messages are shown on a page at onec.
-```py
-REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
-}
+6. migrate the changes to the database.
+```bash
+$ pyhon3 manage.py migrate
 ```
-7. Add restframework to installed apps.
-```py
-INSTALLED_APPS = [
-    ...
-    'rest_framework',
-]
-```
+7. To get the new models to show up on the admin panel, create the admin.py configuration file and register your model class. Also add a '_str_' function to your model class to decide what to show as a header on admin. 
+
+8. Add rest_framework to the settings.py INSTALLED_APPS array.
+
+9. Create and configure the serializers.py file wich turns complex data types like pthon objects into simpler data like json or html.
+
+10. Create and configure a view.py file for the serialiser to display the data for browsers.
+
+11. Configure the urls.py file to display the view.
+
 # //Remember to document how to secure the code for production, aquiering an ssh certificate and so on.
