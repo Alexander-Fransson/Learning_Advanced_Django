@@ -315,3 +315,4 @@ $ pyhon3 manage.py migrate
 11. Configure the urls.py file to display the view.
 
 # //Remember to document how to secure the code for production, aquiering an ssh certificate and so on.
+# //When wrighting comments they should not prioretise what is done as there is the code but why it is done.
